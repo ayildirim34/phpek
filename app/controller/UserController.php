@@ -1,5 +1,5 @@
 <?php
-
+namespace App\Controller;
 use App\Model\User;
 
 require_once('./app/model/User.php');
@@ -39,4 +39,14 @@ class UserController extends User
         }
         return false;
     }
+
+    public function login(string $email, string $password): bool
+    {
+        $user=$this->selectByEmail($email);
+        if($user){
+            return $this->verifyPassword($password, $user->password);
+        }     
+        return false;
+    }
+
 }

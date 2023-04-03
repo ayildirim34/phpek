@@ -1,4 +1,7 @@
 <?php
+/*
+* By Stefan Schumacher
+*/
 namespace App\Table;
 use Table\Database\QueryProvider;
 require_once('./app/table/QueryProvider.php');
@@ -35,12 +38,27 @@ class UserTable extends QueryProvider
       }
       return null;
    }
+
+   public function setUserByEmail(string $email):void
+   {
+      $sqlQuery = 'SELECT * FROM users WHERE email = :email';
+      $arrayBind = [':email'=>$email];
+      $result = $this->selectQuery($sqlQuery,$arrayBind);
+      if(isset($result[0]))
+      {
+         $this->convertSelectResultToObject($result[0]);
+   
+      }
+     
+   }
    
    protected function insert(string $email, string $password , bool $isAdmin = false):int|null
    {
       $sqlQuery = 'INSERT INTO users (email ,password, isAdmin) VALUES (:email,:password,:isAdmin)';
       $arrayBind = [':email'=> $email,':password'=>$password,':isAdmin'=>$isAdmin];
-      return $this->insertQuery($sqlQuery,$arrayBind);
+      $result = $this->insertQuery($sqlQuery,$arrayBind);
+      //var_dump($this->getError());
+      return $result;
    }
 
    public function deleteById(int $id): int|null

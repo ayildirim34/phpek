@@ -33,18 +33,19 @@ public function removeAdmin(string $email): bool
  * return user if User existed
  * return false if User cannot be found, or email dosent existed
  * **/
-public function findUserByEmail(string  $email): User|false
+public function getUserByEmail(string  $email): void
 {
-    return false;
+    $this->setUserByEmail($email);
 }
 
 public function login(string $email, string $password): bool
-{
+{   
     return false;
 }
 
-public function logout(): void
+public function logout()
 {
+    
 }
 /**
  * @return array<User> can be aray of null
@@ -57,7 +58,7 @@ public function getUsers(): array
 }
 
 
-private function hashPassword($password): string
+public function hashPassword($password): string
 {
     $options = [
       'memory_cost' => 2048,
@@ -68,7 +69,7 @@ private function hashPassword($password): string
     return $hash;
 }
 
-  private function verifyPassword(string $password, string $hash): bool
+public function verifyPassword(string $password, string $hash): bool
   {
       if (password_verify($password, $hash)) {
           return true;
