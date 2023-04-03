@@ -1,9 +1,8 @@
 <?php
-namespace App\Controller;
-require_once('./app/model/User.php');
+
 use App\Model\User;
 
-
+require_once('./app/model/User.php');
 class UserController extends User
 {
     public function __construct()
@@ -39,18 +38,5 @@ class UserController extends User
             return true;
         }
         return false;
-    }
-
-    public function login(string $email , string $password):bool
-    {
-        $result = false;
-        $this->getUserByEmail($email);
-
-        if($this->id > 0 )
-        {
-            $result = $this->verifyPassword($password, $this->password);
-        }
-
-        return $result;
     }
 }

@@ -29,9 +29,13 @@ public function removeAdmin(string $email): bool
     return false;
 }
 
-public function getUserByEmail(string  $email):void
+/**
+ * return user if User existed
+ * return false if User cannot be found, or email dosent existed
+ * **/
+public function findUserByEmail(string  $email): User|false
 {
-    $this->setUserByEmail($email);
+    return false;
 }
 
 public function login(string $email, string $password): bool
@@ -64,7 +68,7 @@ private function hashPassword($password): string
     return $hash;
 }
 
-  public function verifyPassword(string $password, string $hash): bool
+  private function verifyPassword(string $password, string $hash): bool
   {
       if (password_verify($password, $hash)) {
           return true;

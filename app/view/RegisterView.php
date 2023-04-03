@@ -1,7 +1,7 @@
 <?php
 namespace App\View;
 
-use App\Controller\UserController;
+use UserController;
 
 require_once("./app/controller/UserController.php");
 require_once("./app/view/BaseView.php");
@@ -45,7 +45,6 @@ class RegisterView extends BaseView {
 
     public function checkIfUserExisted():bool
     {
-        $result = true;
         if($this->email)
         {
            $userExisted =  $this->userController->checkIfUserExisted($this->email);
@@ -53,12 +52,10 @@ class RegisterView extends BaseView {
            {
             $this->component = $this->alert('warning', 'this email is already registered');
            }
-           else
-           {
-            $result = false;
-           }
+           return true;
+
         }
-        return $result;
+        return false;
     }
 
 

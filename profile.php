@@ -1,14 +1,5 @@
-<?php
-session_start();
-    if(!isset($_SESSION['user']))
-    {
-      header('location:login.php');
-      die;
-    }
-include('./template/navbar.php');
- ?>
+<?php include('./template/navbar.php'); ?>
 
-<h1>Welcome User <?=$_SESSION['user']?></h1>
-<a href="logout.php">logout</a>
+<h1>Welcome user xxx </h1>
 
-<?php include('./template/footer.php');?>
+<?php include('./template/footer.php'); ?>
